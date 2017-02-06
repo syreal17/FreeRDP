@@ -4,9 +4,13 @@ cflags="${cflags%\"}"
 cflags="${cflags#\"}"
 cd src_corpora/FreeRDP
 
-CC=$1 CFLAGS="$cflags" cmake -DCMAKE_BUILD_TYPE=Release
+mkdir build
+cd build
+CC=$1 cmake .. -DCMAKE_BUILD_TYPE=Other -DCMAKE_C_FLAGS="$cflags"
 make
-install -D libfreerdp/libfreerdp2.so.2.0.0 ../../$4/
-mv ../../$4/libfreerdp2.so.2.0.0 ../../$4/libfreerdp2.$3
+install -D client/Wayland/wlfreerdp -m 644 -t ../../../$4/
+mv ../../../$4/wlfreerdp ../../../$4/wlfreerdp.$3
 make clean
+cd ..
+rm -rf build/
 cd ../..
