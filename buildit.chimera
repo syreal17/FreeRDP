@@ -1,0 +1,5 @@
+#!/bin/bash
+cflags=$2                                                                       
+cflags="${cflags%\"}"                                                           
+cflags="${cflags#\"}"
+
